@@ -5,6 +5,7 @@ const socketio = require('socket.io')
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./utils/users')
 const {generateMessage}= require('../src/utils/messages')
 const { ETIME } = require('constants')
+// const mongoose= require()
 // const {}= require('../src/utils/users')
 
 const app = express()
@@ -39,6 +40,10 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (message, callback) => {
+
+        //first save
+        
+
         const user = getUser(socket.id)
         io.to(user.room).emit('message', generateMessage(user.username, message))
         callback()
